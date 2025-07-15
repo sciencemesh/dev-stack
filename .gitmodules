@@ -1,3 +1,6 @@
 [submodule "reva"]
 	path = reva
 	url = https://github.com/cs3org/reva
+[submodule "config"]
+	path = config
+	url = git@github.com:cs3org/reva-configs.git
