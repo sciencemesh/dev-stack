@@ -140,8 +140,8 @@ sed < "${ENV_ROOT}/cernbox/web.json"                                          \
   "s/your.nginx.org/${EFSS1}1.docker/"                                        \
   > "${ENV_ROOT}/temp/cernbox-1-conf/config.json"
 
-# the following is a workaround for the reva localfs storage driver, which currently expects this path
-[ ! -d "${ENV_ROOT}/temp/${EFSS1}-1-store" ] && mkdir -p "./temp/${EFSS1}-1-store/data/einstein/einstein"
+# the following is a workaround for the reva localfs storage driver, which currently is configured to expect the home paths to exist
+[ ! -d "${ENV_ROOT}/temp/${EFSS1}-1-store" ] && mkdir -p "./temp/${EFSS1}-1-store/data/einstein/einstein" && mkdir -p "./temp/${EFSS1}-1-store/data/marie/marie"
 [ ! -d "${ENV_ROOT}/temp/${EFSS1}-1-shares" ] && mkdir "./temp/${EFSS1}-1-shares"
 
 fi
@@ -205,8 +205,8 @@ sed < "${ENV_ROOT}/cernbox/web.json"                                          \
   "s/your.nginx.org/${EFSS2}2.docker/"                                        \
   > "${ENV_ROOT}/temp/cernbox-2-conf/config.json"
 
-[ ! -d "${ENV_ROOT}/temp/${EFSS1}-2-store" ] && mkdir -p "./temp/${EFSS1}-2-store/data/einstein/einstein"
-[ ! -d "${ENV_ROOT}/temp/${EFSS1}-2-shares" ] && mkdir "./temp/${EFSS1}-2-shares"
+[ ! -d "${ENV_ROOT}/temp/${EFSS2}-2-store" ] && mkdir -p "./temp/${EFSS2}-2-store/data/einstein/einstein" && mkdir -p "./temp/${EFSS2}-2-store/data/marie/marie"
+[ ! -d "${ENV_ROOT}/temp/${EFSS2}-2-shares" ] && mkdir "./temp/${EFSS2}-2-shares"
 
 fi
 
@@ -235,8 +235,8 @@ docker run --detach --network=testnet                                         \
   -v "${ENV_ROOT}/revad:/configs/revad"                                       \
   -v "${ENV_ROOT}/cernbox:/configs/cernbox"                                   \
   -v "${ENV_ROOT}/temp/${EFSS2}-2-tls:/etc/tls"                               \
-  -v "${ENV_ROOT}/temp/${EFSS1}-2-store:/revalocalstorage"                    \
-  -v "${ENV_ROOT}/temp/${EFSS1}-2-shares:/revashares"                          \
+  -v "${ENV_ROOT}/temp/${EFSS2}-2-store:/revalocalstorage"                    \
+  -v "${ENV_ROOT}/temp/${EFSS2}-2-shares:/revashares"                         \
   -v "${ENV_ROOT}/scripts/reva-run.sh:/usr/bin/reva-run.sh"                   \
   -v "${ENV_ROOT}/scripts/reva-kill.sh:/usr/bin/reva-kill.sh"                 \
   -v "${ENV_ROOT}/scripts/reva-entrypoint.sh:/entrypoint.sh"                  \
